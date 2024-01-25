@@ -1,79 +1,39 @@
-# About First Topic
+# 계약등록(신) 승인합의수수료
 
-<!--Writerside adds this topic when you create a new documentation project.
-You can use it as a sandbox to play with Writerside features, and remove it from the TOC when you don't need it anymore.-->
+## 승인합의 수수료 변경 사항
+- 승인합의 점소 정보 위치 변경 (관리거래처코드 기준)
+- 주문 접수 및 운송장 등록에서 사용하는 업무 거래처 히스토리 테이블 이용
 
-## Add new topics
-You can create empty topics, or choose a template for different types of content that contains some boilerplate structure to help you get started:
+![Create new topic options](img1.png){ border-effect="line" thumbnail="true" width="350"}
 
-![Create new topic options](new_topic_options.png){ width=290 }{border-effect=line}
+## AS-IS VS TO-BE
 
-## Write content
-%product% supports two types of markup: Markdown and XML.
-When you create a new help article, you can choose between two topic types, but this doesn't mean you have to stick to a single format.
-You can author content in Markdown and extend it with semantic attributes or inject entire XML elements.
-
-## Inject XML
-For example, this is how you inject a procedure:
-
-<procedure title="Inject a procedure" id="inject-a-procedure">
-    <step>
-        <p>Start typing and select a procedure type from the completion suggestions:</p>
-        <img src="completion_procedure.png" alt="completion suggestions for procedure" border-effect="line"/>
-    </step>
-    <step>
-        <p>Press <shortcut>Tab</shortcut> or <shortcut>Enter</shortcut> to insert the markup.</p>
-    </step>
-</procedure>
-
-## Add interactive elements
-
-### Tabs
-To add switchable content, you can make use of tabs (inject them by starting to type `tab` on a new line):
+> AS-IS TO-BE TAB 클릭
+>
+{style="tip"}
 
 <tabs>
-    <tab title="Markdown">
-        <code-block lang="plain text">![Alt Text](new_topic_options.png){ width=450 }</code-block>
+    <tab title="AS-IS">
+      <code-block lang="plain text">
+         - 계약이 추진중, 계약만료, 거래중 여부 상관 없이 유일한 최근 1개의 데이터
+         - 테이블 명 : TCT_JOB_CUST (업무 거래처) 
+      </code-block>
     </tab>
-    <tab title="Semantic markup">
-        <code-block lang="xml">
-            <![CDATA[<img src="new_topic_options.png" alt="Alt text" width="450px"/>]]></code-block>
+    <tab title="TO-BE">
+        <code-block lang="plain text">
+         - 운송장 등록에 사용되는 거래처의 해당 시점의 정보    
+         - 적용일자 기준    
+         - 테이블명 : TCT_JOB_CUST_HST (업무 거래처 히스토리) 
+         </code-block>
     </tab>
+
 </tabs>
 
-### Collapsible blocks
-Apart from injecting entire XML elements, you can use attributes to configure the behavior of certain elements.
-For example, you can collapse a chapter that contains non-essential information:
-
-#### Supplementary info {collapsible="true"}
-Content under a collapsible header will be collapsed by default,
-but you can modify the behavior by adding the following attribute:
-`default-state="expanded"`
-
-### Convert selection to XML
-If you need to extend an element with more functions, you can convert selected content from Markdown to semantic markup.
-For example, if you want to merge cells in a table, it's much easier to convert it to XML than do this in Markdown.
-Position the caret anywhere in the table and press <shortcut>Alt+Enter</shortcut>:
-
-<img src="convert_table_to_xml.png" alt="Convert table to XML" width="706" border-effect="line"/>
-
-## Feedback and support
-Please report any issues, usability improvements, or feature requests to our
-<a href="https://youtrack.jetbrains.com/newIssue?project=WRS">YouTrack project</a>
-(you will need to register).
-
-You are welcome to join our
-<a href="https://jb.gg/WRS_Slack">public Slack workspace</a>.
-Before you do, please read our [Code of conduct](https://plugins.jetbrains.com/plugin/20158-writerside/docs/writerside-code-of-conduct.html).
-We assume that you’ve read and acknowledged it before joining.
-
-You can also always email us at [writerside@jetbrains.com](mailto:writerside@jetbrains.com).
-
-<seealso>
-    <category ref="wrs">
-        <a href="https://plugins.jetbrains.com/plugin/20158-writerside/docs/markup-reference.html">Markup reference</a>
-        <a href="https://plugins.jetbrains.com/plugin/20158-writerside/docs/manage-table-of-contents.html">Reorder topics in the TOC</a>
-        <a href="https://plugins.jetbrains.com/plugin/20158-writerside/docs/local-build.html">Build and publish</a>
-        <a href="https://plugins.jetbrains.com/plugin/20158-writerside/docs/configure-search.html">Configure Search</a>
-    </category>
-</seealso>
+> **계약 데이터베이스 모델링 이슈**
+>
+> - 동일한 이름의 데이터(승인합의 점소코드, 차감요율)이 각기 다른 테이블
+    > (TCT_JOB_CUST/TCT_JOB_CUST_HST)에 저장
+> - 중복된 항목에 일관되지 않은 데이터, 비정상적 업데이트 등 이슈 발생
+> - 설계(모델링) 부터 잘못되어 있기에 수정을 위해 많은 시간과 비용 필요
+>
+{style="note"}
